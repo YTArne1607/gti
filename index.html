@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTI</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  
+  <div class="container">
+    <h2>Guess The Imposter</h2>
+    <div class="main">
+      <h3>Spieleranzahl eingeben:</h3>
+      <input type="number" id="playerCount">
+      <br>
+      <br>
+      <br>
+      <button id="playBtn">Spielen</button>
+      <br>
+      <br>
+      <h4 id="error"></h4>
+    </div>
+  </div>
+  
+
+  <script>
+    document.getElementById("playBtn").addEventListener("click", function() {
+      var playerCount = document.getElementById("playerCount");
+      if (playerCount.value == "") {
+        document.getElementById("error").innerHTML = "Bitte geben Sie eine (gültige) Spielerzahl ein.";
+    } else if (playerCount.value < 3) {
+        document.getElementById("error").innerHTML = "Die Spieleranzahl muss mind. 3 Spieler betragen.";
+    } else {
+        document.getElementById("error").style.color = "#00ff00";
+document.getElementById("error").innerHTML = "Erfolgreich. Sie werden weitergeleitet.";
+    
+        setTimeout(function() {
+          localStorage.setItem("playerCount", playerCount.value);
+          window.location.href = "spiel.html";
+        }, 2500);
+
+      }
+    });
+    
+   
+    
+  </script>
+
+</body>
+
+</html>

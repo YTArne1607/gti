@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTI</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container2">
+    <h2>Guess The Imposter</h2>
+    <div class="main2">
+      <h3>Spieler <p id="player"></p></h3>
+      
+      <h1 id="word"></h1>
+      
+      <button id="showWord">Wort anzeigen</button>
+      <br>
+      <br>
+      <button onclick="nextSpieler()" id="nextPlayer">Nächster Spieler</button>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <button onclick="restartGame()" id="restart">Neustart</button>
+    </div>
+  </div>
+
+  <script>
+
+    //document.getElementById("nextPlayer").disabled = true;
+    
+    var playerCount = localStorage.getItem("playerCount");
+
+    //var randomImpostor = Math.floor(Math.random() * playerCount.length);
+
+    /*for (var j = 1; j <= playerCount; j++) {
+      document.getElementById("player").innerHTML = "Spieler " + j + ":";
+    }
+
+    j = randomImpostor;*/
+    let currentPlayer;
+    let players;
+    let secretWord;
+
+    //document.getElementById("player").innerHTML = "Spieler 1: ";
+
+    const wörter = ["fahren", "schreiben", "trinken", "essen", "lesen", "schlafen", "tanzen", "sprinten", "schwimmen", "kaufen", "betrunken sein", "singen", "lachen", "weinen", "fliegen", "entspannen", "studieren", "arbeiten", "jagen", "spielen", "reisen", "kochen", "backen", "sterben", "rechnen", "malen", "graben", "schneiden", "entführen", "klettern", "hören", "schreien", "sprechen", "lernen", "erkranken", "heilen", "marschieren", "starren", "fallen", "kopieren", "angreifen", "verstecken", "trainieren", "schießen", "schlachten", "waschen", "duschen", "schleifen", "altern", "verschicken", "teilen", "schleichen", "regieren", "kämpfen", "küssen", "schlagen"];
+
+    function initGame() {
+
+      document.getElementById("player").innerText = "1";
+      document.getElementById("word").style.display = "none";
+      document.getElementById("showWord").disabled = false;
+      document.getElementById("nextPlayer").disabled = false;
+
+      players = Array.from({ length: playerCount }, () => "");
+
+      //players = [];
+      currentPlayer = 0;
+
+      secretWord = wörter[Math.floor(Math.random() * wörter.length)]
+      const imposterIndex = Math.floor(Math.random() * players.length);
+
+      for (let i = 0; i < players.length; i++) {
+      players[i] = i == imposterIndex ? "Betrüger" : secretWord;
+    }
+      
+
+      //const wörter = ["fahren", "schreiben", "trinken", "essen", "lesen", "schlafen", "tanzen", "sprinten", "schwimmen", "kaufen", "betrunken sein", "singen", "lachen", "weinen", "fliegen", "entspannen", "studieren", "arbeiten", "jagen", "spielen", "reisen", "kochen", "backen", "sterben", "rechnen", "malen", "graben", "schneiden", "entführen", "klettern", "hören", "schreien", "sprechen", "lernen", "erkranken", "heilen"];
+
+      /*const ausgewählteWörter = [];
+
+      function wähleZufälligesWort() {
+        const zufälligerIndex = Math.floor(Math.random() * wörter.length);
+        const wort = wörter[zufälligerIndex];
+
+        if (ausgewählteWörter.includes(wort)) {
+          return;
+        }
+
+        ausgewählteWörter.push(wort);
+        
+      }
+
+      // Wähle mehrere Wörter und prüfe auf Duplikate
+      for (let i = 0; i < 10; i++) {
+        wähleZufälligesWort();
+      }*/
+    }
+
+      //document.getElementById("showWord").disabled = true;
+      //document.getElementById("nextPlayer").disabled = false;
+    document.getElementById("showWord").addEventListener("click", function() {
+      
+      document.getElementById("word").innerText = players[currentPlayer];
+      document.getElementById("word").style.display = "block";
+
+    });
+
+    function nextSpieler() {
+      
+      document.getElementById("word").style.display = "none";
+      currentPlayer++;
+      if (currentPlayer >= players.length) {
+        document.getElementById("player").innerText = "Alle Spieler haben ihr Wort gesehen!";
+        document.getElementById("showWord").disabled = true;
+        document.getElementById("nextPlayer").disabled = true;
+      } else {
+        document.getElementById("player").innerText = currentPlayer + 1;
+      }
+
+    }
+
+    function restartGame() {
+      initGame();
+    }
+
+
+    initGame();
+
+
+
+
+    
+    
+
+    /*function wortAuswahl(wortArray) {
+      
+      const ausgewaehlteWorte = [];
+      for (let i = 0; i < wortArray.length; i++) {
+        let zufaelligesWort;
+        let wortGefunden = false;
+
+        while (!wortGefunden) {
+          const zufaelligesWortIndex = Math.floor(Math.random() * wortArray.length);
+          zufaelligesWort = wortArray[zufaelligesWortIndex];
+
+          // Überprüfen, ob das Wort bereits im Array der ausgewählten Wörter ist
+          if (!ausgewaehlteWorte.includes(zufaelligesWort)) {
+            ausgewaehlteWorte.push(zufaelligesWort);
+            wortGefunden = true;
+          }
+        }
+      }
+
+      return ausgewaehlteWorte;
+    }
+
+    const ausgewaehlteWorte = wortAuswahl(wortArray);
+
+    const wortArray = ["fahren", "schreiben", "trinken", "essen", "lesen", "schlafen", "tanzen", "sprinten", "schwimmen", "kaufen", "betrunken sein", "singen", "lachen", "weinen", "fliegen", "entspannen", "studieren", "arbeiten", "jagen", "spielen", "reisen", "kochen", "backen", "sterben", "rechnen", "malen", "graben", "schneiden", "entführen", "klettern", "hören", "schreien", "sprechen", "lernen", "erkranken", "heilen"];
+    document.getElementById("word").innerHTML = ausgewaehlteWorte;*/
+
+    
+    
+    
+  </script>
+
+</body>
+
+</html>
