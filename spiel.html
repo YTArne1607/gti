@@ -49,7 +49,73 @@
 
     //document.getElementById("player").innerHTML = "Spieler 1: ";
 
-    const wörter = ["fahren", "schreiben", "trinken", "essen", "lesen", "schlafen", "tanzen", "sprinten", "schwimmen", "kaufen", "betrunken sein", "singen", "lachen", "weinen", "fliegen", "entspannen", "studieren", "arbeiten", "jagen", "spielen", "reisen", "kochen", "backen", "sterben", "rechnen", "malen", "graben", "schneiden", "entführen", "klettern", "hören", "schreien", "sprechen", "lernen", "erkranken", "heilen", "marschieren", "starren", "fallen", "kopieren", "angreifen", "verstecken", "trainieren", "schießen", "schlachten", "waschen", "duschen", "schleifen", "feiern", "verschicken", "teilen", "schleichen", "regieren", "kämpfen", "küssen", "schlagen", "boxen", "turnen", "planen", "komponieren", "reparieren", "beraten", "begrüßen"];
+    const hints = ["Motor",
+                  "Tinte",
+                  "Glas",
+                  "Gabel",
+                  "Seiten",
+                  "Kissen",
+                  "Rhythmus",
+                  "Tempo",
+                  "Nass",
+                  "Tasche",
+                  "Schwindel",
+                  "Ton",
+                  "Freude",
+                  "Träne",
+                  "Wolke",
+                  "Ruhe",
+                  "Vorlesung",
+                  "Meeting",
+                  "Beutezug",
+                  "Zeitvertreib",
+                  "Abenteuer",
+                  "Hitze",
+                  "Teig",
+                  "Ende",
+                  "Zahlen",
+                  "Farbe",
+                  "Erde",
+                  "Klinge",
+                  "Schatten",
+                  "Höhe",
+                  "Klang",
+                  "Echo",
+                  "Mund",
+                  "Kopf",
+                  "Fieber",
+                  "Medizin",
+                  "Reihe",
+                  "Blick",
+                  "Boden",
+                  "Dublikat",
+                  "Wucht",
+                  "Versteck",
+                  "Kraft",
+                  "Abzug",
+                  "Schlachter",
+                  "Schaum",
+                  "Strahl",
+                  "Kante",
+                  "Bass",
+                  "Brief",
+                  "Paket",
+                  "Sohle",
+                  "Krone",
+                  "Duell",
+                  "Lippenpaar",
+                  "Wange",
+                  "Fäuste",
+                  "Balance",
+                  "Skizze",
+                  "Melodie",
+                  "Zange",
+                  "Rat",
+                  "Ritual"]
+
+
+
+    const wörter = ["fahren", "schreiben", "trinken", "essen", "lesen", "schlafen", "tanzen", "sprinten", "schwimmen", "kaufen", "betrunken sein", "singen", "lachen", "weinen", "fliegen", "entspannen", "studieren", "arbeiten", "jagen", "spielen", "reisen", "kochen", "backen", "sterben", "rechnen", "malen", "graben", "schneiden", "entführen", "klettern", "hören", "schreien", "sprechen", "lernen", "erkranken", "heilen", "marschieren", "starren", "fallen", "kopieren", "angreifen", "verstecken", "trainieren", "schießen", "schlachten", "waschen", "duschen", "schleifen", "feiern", "verschicken", "teilen", "schleichen", "regieren", "kämpfen", "küssen", "schlagen", "boxen", "turnen", "planen", "komponieren", "reparieren", "beraten", "opfern"];
 
     function initGame() {
 
@@ -63,11 +129,16 @@
       //players = [];
       currentPlayer = 0;
 
-      secretWord = wörter[Math.floor(Math.random() * wörter.length)]
+      let randomIndex = Math.floor(Math.random() * wörter.length);
+
+      secretWord = wörter[randomIndex];
+      let hint = hints[randomIndex];
+
+      //secretWord = wörter[Math.floor(Math.random() * wörter.length)]
       const imposterIndex = Math.floor(Math.random() * players.length);
 
       for (let i = 0; i < players.length; i++) {
-      players[i] = i == imposterIndex ? "Betrüger" : secretWord;
+      players[i] = i == imposterIndex ? `Betrüger (Hinweis: ${hint})` : secretWord;
     }
       
 
